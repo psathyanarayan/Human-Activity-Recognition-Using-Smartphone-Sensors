@@ -64,6 +64,19 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Activity Recognition'),
+        actions: <Widget>[
+    Padding(
+      padding: EdgeInsets.only(right: 20.0),
+      child: GestureDetector(
+        onTap: () {},
+        child: Icon(
+          Icons.logout,
+          size: 26.0,
+        ),
+      )
+    ),
+    
+  ],
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
