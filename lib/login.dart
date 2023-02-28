@@ -1,120 +1,115 @@
 import 'package:flutter/material.dart';
-
-void main(){
-    runApp(const MyApp());
-}
-
-class MyApp extends StatefulWidget{
-  const MyApp ({Key? key}) : super(key: key);
-
-  // @override
-  // Widget build(BuildContent context) {
-  //   return MaterialApp(
-  //       home:HomePage(),
-  //   );
-  // }
-  
+ 
+void main() => runApp(const Login());
+ 
+class Login extends StatelessWidget {
+  const Login({Key? key}) : super(key: key);
+ 
+  static const String _title = 'Activity';
+ 
   @override
-  State<StatefulWidget> createState() {
-    // TODO: implement createState
-    throw UnimplementedError();
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: _title,
+      home: Scaffold(
+        appBar: AppBar(title: const Text(_title)),
+        body: const MyStatefulWidget(),
+      ),
+    );
   }
-
 }
-
-
-class HomePage extends StatefulWidget {
- const HomePage ({Key? key}) : super (key: key);
-
- @override
- State<HomePage> createState() => _HomePageState();
- }
-class _HomePageState extends State‹HomePage> { 
-    @override
-    Widget build (BuildContext context) {
-         return Scaffold(
-            body: LoginScreen(),
-         );}
+ 
+class MyStatefulWidget extends StatefulWidget {
+  const MyStatefulWidget({Key? key}) : super(key: key);
+ 
+  @override
+  State<MyStatefulWidget> createState() => _MyStatefulWidgetState();
 }
-class LoginScreen extends Statefulwidget {
-    const LoginScreen ({Key? key}) : super (key: key);
-
-    @override
-    _LoginScreenState createState() => _LoginScreenState();
-}
-
-class _LoginScreenState extends State<LoginScreen> {
-    @override
-    Widget build (BuildContext context) {
-        return Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                    const Text("MyApp Title", 
-                    style:TextStyle(
-                        color.black,
-                        fontSize:28.0,
-                        fontWeight:FontWeight.bold,
-                        ),
-                    ),
-                    const Text(
-                        "Login to your App",
-                        style: TextStyle(
-                            color:Colors.black,
-                            fontSize: 44.0,
-                        ),
-                    ),
-                    const SizedBox(
-                        height: 44.0,
-                    ),
-                    const TextField(
-                        keyboardType: TextInputType.emailAddress,
-                        decoration: InputDecoration(
-                            hintText: "User Email",
-                            prefixIcon: Icon(Icons.mail,color: Colors.black),
-                        ),
-                    ),
-                    const SizedBox(
-                        height: 26.0,
-                    ),
-                    const TextField(
-                        obscureText: true,
-                        decoration: InputDecoration(
-                            hintText: "User Password",
-                            prefixIcon: Icon(Icons.mail,color: Colors.black),
-                        ),
-                    ),
-                    const SizedBox(
-                        height:12.0,
-                    ),
-                    const Text(
-                        "Dont Remember your Password?",
-                        style:TextStyle(color: Colors.blue),
-                    ),
-                    const SizedBox(
-                        height: 88.0,
-                    ),
-                    Container(
-                        width: double.infinity,
-                        child: RawMaterialButton(
-                            fillcolor: Color(0xFF0069FE),
-                            elevation: 0.0,
-                            padding: EdgeInsets.symmetric(vertical: 20.0),
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(12.0)),
-                            onPressed: () {},
-                            child: Text("Login",
-                                style(TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 18.0,
-                                )),
-                            ),
-                        ),
-                    ),
-                ],
+ 
+class _MyStatefulWidgetState extends State<MyStatefulWidget> {
+  TextEditingController nameController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+ 
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+        padding: const EdgeInsets.all(20),
+        child: ListView(
+          children: <Widget>[
+            const SizedBox(
+                    height: 116,
+                  ),
+            Container(
+                alignment: Alignment.center,
+                padding: const EdgeInsets.all(10),
+                child: const Text(
+                  'Activity Recogniser',
+                  style: TextStyle(
+                      color: Colors.blue,
+                      fontWeight: FontWeight.w500,
+                      fontSize: 30),
+                )),
+            Container(
+                alignment: Alignment.center,
+                padding: const EdgeInsets.all(10),
+                child: const Text(
+                  'Sign in',
+                  style: TextStyle(fontSize: 20),
+                )),
+            Container(
+              padding: const EdgeInsets.all(10),
+              child: TextField(
+                controller: nameController,
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'User Name',
+                ),
+              ),
             ),
-        );
-    }
+            Container(
+              padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+              child: TextField(
+                obscureText: true,
+                controller: passwordController,
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'Password',
+                ),
+              ),
+            ),
+            TextButton(
+              onPressed: () {
+                //forgot password screen
+              },
+              child: const Text('Forgot Password',),
+            ),
+            Container(
+                height: 50,
+                padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                child: ElevatedButton(
+                  child: const Text('Login'),
+                  onPressed: () {
+                    print(nameController.text);
+                    print(passwordController.text);
+                  },
+                )
+            ),
+            // Row(
+            //   children: <Widget>[
+            //     const Text('Does not have account?'),
+            //     TextButton(
+            //       child: const Text(
+            //         'Sign up',
+            //         style: TextStyle(fontSize: 20),
+            //       ),
+            //       onPressed: () {
+            //         //signup screen
+            //       },
+            //     )
+            //   ],
+            //   mainAxisAlignment: MainAxisAlignment.center,
+            // ),
+          ],
+        ));
+  }
 }

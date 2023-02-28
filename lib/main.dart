@@ -6,6 +6,7 @@ import 'package:sensors_plus/sensors_plus.dart';
 import 'accelerometer_data.dart';
 import 'gyroscope_data.dart';
 import 'admin.dart';
+import 'login.dart';
 
 
 void main() {
@@ -71,7 +72,7 @@ class _MyHomePageState extends State<MyHomePage> {
       child: GestureDetector(
         onTap: () {Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => admin()),
+                MaterialPageRoute(builder: (context) => Login()),
               );},
         
         child: Icon(
