@@ -5,6 +5,7 @@ import 'package:sensor_data_logging/chart.dart';
 import 'package:sensors_plus/sensors_plus.dart';
 import 'accelerometer_data.dart';
 import 'gyroscope_data.dart';
+import 'admin.dart';
 
 
 void main() {
@@ -68,7 +69,11 @@ class _MyHomePageState extends State<MyHomePage> {
     Padding(
       padding: EdgeInsets.only(right: 20.0),
       child: GestureDetector(
-        onTap: () {},
+        onTap: () {Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => admin()),
+              );},
+        
         child: Icon(
           Icons.logout,
           size: 26.0,
@@ -91,23 +96,31 @@ class _MyHomePageState extends State<MyHomePage> {
           Card(
           elevation: 10,
           shadowColor: Colors.black,
-          color: Colors.greenAccent[100],
+          color: Colors.blue[100],
           child: SizedBox(
             width: 300,
-            height: 100,
+            height: 200,
             child: Padding(
               padding: const EdgeInsets.all(20.0),
               child: Column(
                 children: [
-                  
+                  CircleAvatar(
+                    backgroundColor: Colors.blue[500],
+                    radius: 45,
+                    child: const CircleAvatar(
+                      backgroundImage: NetworkImage(
+                          "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png?20150327203541"), //NetworkImage
+                      radius: 100,
+                    ), //CircleAvatar
+                  ), //CircleAvatar
                   const SizedBox(
                     height: 10,
                   ), //SizedBox
                   Text(
-                    'GeeksforGeeks',
+                    'Person 1',
                     style: TextStyle(
                       fontSize: 30,
-                      color: Colors.green[900],
+                      color: Colors.blue[900],
                       fontWeight: FontWeight.w500,
                     ), //Textstyle
                   ), //Text
@@ -140,33 +153,45 @@ class _MyHomePageState extends State<MyHomePage> {
             ), //Padding
           ), //SizedBox
         ), //Card
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Text('Accelerometer: $accelerometer'),
-              ],
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Text('UserAccelerometer: $userAccelerometer'),
-              ],
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Text('Gyroscope: $gyroscope'),
-              ],
-            ),
-          ),
+          // Padding(
+          //   padding: const EdgeInsets.all(16.0),
+          //   child: Row(
+          //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //     children: <Widget>[
+          //       Text('Accelerometer: $accelerometer'),
+          //     ],
+          //   ),
+          // ),
+          // Padding(
+          //   padding: const EdgeInsets.all(16.0),
+          //   child: Row(
+          //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //     children: <Widget>[
+          //       Text('UserAccelerometer: $userAccelerometer'),
+                
+          //     ],
+          //   ),
+          // ),
+          Text(
+    'Gyroscope: $gyroscope',textAlign: TextAlign.center, style: TextStyle(fontSize: 20,fontWeight: FontWeight.w500)
+),
+         Text(
+    'Accelerometer: $userAccelerometer',textAlign: TextAlign.center, style: TextStyle(fontSize: 20,fontWeight: FontWeight.w500)
+),
+          // Center(
+   // Align however you like (i.e .centerRight, centerLeft)
+//   child: Padding(
+//             padding: const EdgeInsets.all(0.0),
+            
+//             child: Row(
+//               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//               children: <Widget>[
+//                 Text('Gyroscope: $gyroscope',textAlign: TextAlign.center, style: TextStyle(fontSize: 20,fontWeight: FontWeight.w500)),
+//               ],
+//             ),
+//           ),
+// ),
+          
           // Padding(
           //   padding: const EdgeInsets.all(16.0),
           //   child: Row(
