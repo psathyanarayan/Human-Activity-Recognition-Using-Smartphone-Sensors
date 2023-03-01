@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "447520386436",
+    "project_id": "activity-a2e8e",
+    "storage_bucket": "activity-a2e8e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:447520386436:android:7f2a11c63fb24100b241d1",
+        "android_client_info": {
+          "package_name": "com.example.sensor_data_logging"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "447520386436-mkjsouo6c8k1vk6c3i6m46e9hasgo8mg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB8EgBhYbm-hQpDkQJ9soWXuL3opab7bsw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "447520386436-mkjsouo6c8k1vk6c3i6m46e9hasgo8mg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

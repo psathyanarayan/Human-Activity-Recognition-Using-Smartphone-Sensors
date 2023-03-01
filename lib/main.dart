@@ -10,7 +10,7 @@ import 'login.dart';
 
 
 void main() {
-  runApp(const MyApp());
+  
 }
 
 class MyApp extends StatelessWidget {
@@ -310,3 +310,4 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
+
