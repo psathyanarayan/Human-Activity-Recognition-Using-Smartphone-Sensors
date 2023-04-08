@@ -1,13 +1,14 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:sensor_data_logging/MyHomePage.dart';
 import 'main.dart';
 
 void main() => runApp(const Login());
 
 class Login extends StatelessWidget {
   const Login({Key? key}) : super(key: key);
-
+  
   static const String _title = 'Activity';
 
   @override
@@ -44,7 +45,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
             future: _initializeFirebase(),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {
-                return LoginPage();
+                return const LoginPage();
               }
               return const Text('Hi');
             }));
@@ -153,9 +154,10 @@ class _LoginPage extends State<LoginPage> {
                           email: nameController.text,
                           password: passwordController.text,
                           context: context);
+                      print(user);
                       if (user != null) {
                         Navigator.of(context).pushReplacement(MaterialPageRoute(
-                            builder: (context) => MyHomePage()));
+                            builder: (context) => const MyHomePage()));
                       }
                     }))
             // Row(
