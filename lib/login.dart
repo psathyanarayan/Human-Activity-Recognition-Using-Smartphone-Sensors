@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:sensor_data_logging/MyHomePage.dart';
+import 'package:sensor_data_logging/admin.dart';
 import 'main.dart';
 
 void main() => runApp(const Login());
@@ -155,9 +156,20 @@ class _LoginPage extends State<LoginPage> {
                           password: passwordController.text,
                           context: context);
                       print(user);
+                      // if (user != null) {
+                      //   Navigator.of(context).pushReplacement(MaterialPageRoute(
+                      //       builder: (context) => const MyHomePage()));
+                      // }
                       if (user != null) {
-                        Navigator.of(context).pushReplacement(MaterialPageRoute(
-                            builder: (context) => const MyHomePage()));
+                        if (user.email == "admin@gmail.com") {
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) => admin()));
+                        } else {
+                          Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const MyHomePage()));
+                        }
                       }
                     }))
             // Row(

@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'admin.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
 class ApiReq {
   sendApi(var data) async {
     var body = json.encode(data);
@@ -19,7 +19,9 @@ class ApiReq {
     var jsonData = json.decode(result);
     var bodyData = jsonData['prediction'];
     print(bodyData);
-    
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString('bodyData', bodyData);
+    // return Future.delayed(Duration(seconds: 2), () => bodyData);
   }
 }
 

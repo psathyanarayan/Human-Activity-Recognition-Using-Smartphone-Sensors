@@ -54,7 +54,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
     var apiReq = ApiReq();
     // print(acc);
-    apiReq.sendApi(acc);
+    var finalData = apiReq.sendApi(acc);
     // print(finalData);
     
     return Scaffold(
@@ -67,7 +67,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => admin()),
+                    MaterialPageRoute(builder: (context) => Login()),
                   );
                 },
                 child: Icon(
@@ -208,7 +208,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 // Navigator.push(
                 //   context,
                 //   MaterialPageRoute(
-                //       builder: (context) => ChartScreen(
+                //       builder: (context) => admin(
                 //           accelerometerData: _accelerometerData,
                 //           gyroscopeData: _gyroscopeData)),
                 // );

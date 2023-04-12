@@ -2,8 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:sensor_data_logging/jsonConv.dart';
+import 'package:sensor_data_logging/login.dart';
 import 'package:sensor_data_logging/sendTest.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
 // void main() {
 //   runApp(const admin());
 // }
@@ -19,27 +20,25 @@ class admin extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Activity'),
+      home: const MyAdminPage(title: 'Activity'),
     );
   }
 }
 
-
 var apiReq = ApiReq();
 // print(acc);
 
-
 // print(finalData);
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, this.title}) : super(key: key);
+class MyAdminPage extends StatefulWidget {
+  const MyAdminPage({Key? key, this.title}) : super(key: key);
 
   final String? title;
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<MyAdminPage> createState() => _MyAdminPageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _MyAdminPageState extends State<MyAdminPage> {
   // List<double>? _accelerometerValues;
   // List<double>? _userAccelerometerValues;
   // List<double>? _gyroscopeValues;
@@ -48,8 +47,22 @@ class _MyHomePageState extends State<MyHomePage> {
 
   // List<AccelerometerData> _accelerometerData = [];
   // List<GyroscopeData> _gyroscopeData = [];
+  String? _bodyData;
 
-  int backAndForth = 0;
+  @override
+  void initState() {
+    super.initState();
+    _getBodyData();
+  }
+
+  void _getBodyData() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      _bodyData = prefs.getString('bodyData');
+    });
+    int backAndForth = 0;
+  }
+
   @override
   Widget build(BuildContext context) {
     // final accelerometer =
@@ -61,7 +74,7 @@ class _MyHomePageState extends State<MyHomePage> {
     //     .toList();
     // final magnetometer =
     // _magnetometerValues?.map((double v) => v.toStringAsFixed(1)).toList();
-  
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Admin Page'),
@@ -69,12 +82,12 @@ class _MyHomePageState extends State<MyHomePage> {
           Padding(
               padding: EdgeInsets.only(right: 20.0),
               child: GestureDetector(
-                // onTap: () {
-                //   Navigator.push(
-                //     context,
-                //     MaterialPageRoute(builder: (context) => const admin()),
-                //   );
-                // },
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Login()),
+                  );
+                },
                 child: Icon(
                   Icons.logout,
                   size: 26.0,
@@ -151,7 +164,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       height: 26,
                     ), //SizedBox
                     Text(
-                      "finalData",
+                      "$_bodyData",
                       style: TextStyle(
                         fontSize: 20,
                         color: Colors.blue[500],
