@@ -327,7 +327,7 @@ class ApiReq  {
     "GlobalParameters": {}
   };
 
-  sendApi() async {
+  sendApi(acc) async {
     final body = utf8.encode(json.encode(data));
     var response = await http.post(
         Uri.parse(

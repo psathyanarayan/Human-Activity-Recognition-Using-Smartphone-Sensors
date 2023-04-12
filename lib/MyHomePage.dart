@@ -1,5 +1,5 @@
 import 'dart:async';
-
+import 'admin.dart';
 import 'package:flutter/material.dart';
 // import 'package:sensor_data_logging/chart.dart';
 import 'package:sensor_data_logging/gyroscope_data.dart';
@@ -51,10 +51,12 @@ class _MyHomePageState extends State<MyHomePage> {
       Gz: _gyroscopeValues![2],
     );
     // print(acc);
-    
+
     var apiReq = ApiReq();
     // print(acc);
     apiReq.sendApi(acc);
+    // print(finalData);
+    
     return Scaffold(
       appBar: AppBar(
         title: const Text('Activity Recognition'),
@@ -65,7 +67,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => Login()),
+                    MaterialPageRoute(builder: (context) => admin()),
                   );
                 },
                 child: Icon(

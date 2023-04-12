@@ -1,21 +1,25 @@
 import 'dart:convert';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'admin.dart';
 
 class ApiReq {
   sendApi(var data) async {
-    final body = json.encode(data);
+    var body = json.encode(data);
     // print("hi");
-    print(body);
+    // print(body);
     var response = await http.post(
-      Uri.parse("http://10.0.2.2:5000/predict"),
+      Uri.parse("https://sensorapi.up.railway.app/predict"),
       headers: {"Content-Type": "application/json"},
       body: body,
     );
     // print('Response status: ${response.statusCode}');
     // print('Response body: ${response.body}');
-    final result = response.body;
+    var result = response.body;
     var jsonData = json.decode(result);
-    print(jsonData['prediction']);
+    var bodyData = jsonData['prediction'];
+    print(bodyData);
+    
   }
 }
 
@@ -29,7 +33,6 @@ class ApiReq {
 //     "gz": 0.0
 //   };
 //   var apiReq = ApiReq();
-  
-//     apiReq.sendApi(data);
 
+//   apiReq.sendApi(data);
 // }
