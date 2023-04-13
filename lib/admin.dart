@@ -1,5 +1,7 @@
 //import 'dart:async';
 
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:sensor_data_logging/jsonConv.dart';
 import 'package:sensor_data_logging/login.dart';
@@ -39,28 +41,39 @@ class MyAdminPage extends StatefulWidget {
 }
 
 class _MyAdminPageState extends State<MyAdminPage> {
-  // List<double>? _accelerometerValues;
-  // List<double>? _userAccelerometerValues;
-  // List<double>? _gyroscopeValues;
-  // List<double>? _magnetometerValues;
-  // final _streamSubscriptions = <StreamSubscription<dynamic>>[];
-
-  // List<AccelerometerData> _accelerometerData = [];
-  // List<GyroscopeData> _gyroscopeData = [];
-  String? _bodyData;
+  late StreamController<String> bodyDataController;
+  late Stream<String> bodyDataStream;
+  late StreamSubscription<String> bodyDataStreamSubscription;
 
   @override
   void initState() {
     super.initState();
-    _getBodyData();
+    bodyDataController = StreamController<String>();
+    bodyDataStream = getBodyDataStream();
+    bodyDataStreamSubscription = bodyDataStream.listen((data) {
+      bodyDataController.add(data);
+    });
   }
 
-  void _getBodyData() async {
+  @override
+  void dispose() {
+    bodyDataController.close();
+    bodyDataStreamSubscription.cancel();
+    super.dispose();
+  }
+
+  Stream<String> getBodyDataStream() async* {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    setState(() {
-      _bodyData = prefs.getString('bodyData');
-    });
-    int backAndForth = 0;
+    while (true) {
+      String? bodyData = prefs.getString('bodyData');
+      print('This is getBodyDataStream WORKS');
+      print(bodyData);
+      if (bodyData != null) {
+        yield bodyData;
+      }
+      // Add a delay to avoid excessive polling
+      await Future.delayed(Duration(milliseconds: 500));
+    }
   }
 
   @override
@@ -163,17 +176,40 @@ class _MyAdminPageState extends State<MyAdminPage> {
                     const SizedBox(
                       height: 26,
                     ), //SizedBox
-                    Text(
-                      "$_bodyData",
-                      style: TextStyle(
-                        fontSize: 20,
-                        color: Colors.blue[500],
-                        fontWeight: FontWeight.w400,
-                      ), //Textstyle
-                    ), //Text
-                    const SizedBox(
-                      height: 2,
-                    ),
+                    Center(
+      child: StreamBuilder<String>(
+        stream: bodyDataController.stream,
+        builder: (context, snapshot) {
+          if (snapshot.hasError) {
+            return Text(
+              "Error: ${snapshot.error}",
+              style: TextStyle(
+                fontSize: 20,
+                color: Colors.red,
+                fontWeight: FontWeight.w400,
+              ),
+            );
+          } else if (!snapshot.hasData) {
+            return Text(
+              "Loading...",
+              style: TextStyle(
+                fontSize: 20,
+                color: Colors.blue[500],
+                fontWeight: FontWeight.w400,
+              ),
+            );
+          }
+          return Text(
+            snapshot.data!,
+            style: TextStyle(
+              fontSize: 20,
+              color: Colors.blue[500],
+              fontWeight: FontWeight.w400,
+            ),
+          );
+        },
+      ),
+    )
                   ],
                 ), //Column
               ), //Padding

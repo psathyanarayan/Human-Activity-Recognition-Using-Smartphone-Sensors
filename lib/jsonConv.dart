@@ -4,20 +4,33 @@ class SensorData {
   double Ax;
   double Ay;
   double Az;
+  double LAx;
+  double LAy;
+  double LAz;
   double Gx;
   double Gy;
   double Gz;
+  double Mx;
+  double My;
+  double Mz;
 
   SensorData(
       {required this.Ax,
       required this.Ay,
       required this.Az,
+      required this.LAx,
+      required this.LAy,
+      required this.LAz,
       required this.Gx,
       required this.Gy,
-      required this.Gz});
+      required this.Gz,
+      required this.Mx,
+      required this.My,
+      required this.Mz
+      });
 
   Map<String, dynamic> toJson() {
-    return {'ax': Ax, 'ay': Ay, 'az': Az, 'gx': Gx, 'gy': Ay, 'gz': Gz};
+    return {'ax': Ax, 'ay': Ay, 'az': Az,'lax': LAx, 'lay': LAy, 'laz': LAz, 'gx': Gx, 'gy': Ay, 'gz': Gz,'mx': Gx, 'my': Ay, 'mz': Gz};
   }
 }
 
