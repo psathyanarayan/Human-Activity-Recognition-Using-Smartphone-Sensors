@@ -14,11 +14,11 @@ class Login extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       title: _title,
       home: Scaffold(
-        appBar: AppBar(title: const Text(_title)),
-        body: const MyStatefulWidget(),
+        // appBar: AppBar(title: const Text(_title)),
+        body: MyStatefulWidget(),
       ),
     );
   }
@@ -90,76 +90,165 @@ class _LoginPage extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-        padding: const EdgeInsets.all(20),
-        child: ListView(
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: SingleChildScrollView(
+        child : Padding(
+          padding: const EdgeInsets.all(95),
+        
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
+            Image.asset(
+              'assets/images/logo2.png',
+              height: 200,
+              width: 200,
+            ),
+            // const SizedBox(
+            //   height: 1,
+            // ),
+            // const Text(
+            //   'Activity Recognizer',
+            //   style: TextStyle(
+            //       color: Colors.blue,
+            //       fontWeight: FontWeight.w500,
+            //       fontSize: 30),
+            // ),
+            // const SizedBox(
+            //   height: 20,
+            // ),
+            TextFormField(
+  controller: nameController,
+  keyboardType: TextInputType.text,
+  decoration: InputDecoration(
+    filled: true,
+    fillColor: Colors.grey.shade200,
+    border: OutlineInputBorder(
+      borderSide: BorderSide.none,
+      borderRadius: BorderRadius.circular(15.0),
+    ),
+    labelText: 'User Name',
+    labelStyle: TextStyle(
+      color: Colors.grey[600],
+  
+      fontWeight: FontWeight.bold,
+      
+    ),
+    hintText: 'Enter your username',
+    hintStyle: TextStyle(
+      color: Colors.grey.shade500,
+      fontSize: 18.0,
+    ),
+    
+    enabledBorder: OutlineInputBorder(
+      borderSide: BorderSide(
+        color: Colors.grey[400]!,
+      ),
+      borderRadius: BorderRadius.circular(20.0),
+    ),
+    focusedBorder: const OutlineInputBorder(
+      borderSide: BorderSide(
+        color: Colors.blue,
+        width: 2,
+      ),
+    ),
+    errorBorder: OutlineInputBorder(
+      borderSide: const BorderSide(color: Colors.red),
+      borderRadius: BorderRadius.circular(10.0),
+    ),
+    focusedErrorBorder: OutlineInputBorder(
+      borderSide: const BorderSide(color: Colors.red),
+      borderRadius: BorderRadius.circular(10.0),
+    ),
+  ),
+  validator: (value) {
+    if (value!.isEmpty) {
+      return 'Please enter your username';
+    }
+    return null;
+  },
+),
+
             const SizedBox(
-              height: 116,
+              height: 30,
             ),
-            Container(
-                alignment: Alignment.center,
-                padding: const EdgeInsets.all(10),
-                child: const Text(
-                  'Activity Recogniser',
-                  style: TextStyle(
-                      color: Colors.blue,
-                      fontWeight: FontWeight.w500,
-                      fontSize: 30),
-                )),
-            Container(
-                alignment: Alignment.center,
-                padding: const EdgeInsets.all(10),
-                child: const Text(
-                  'Sign in',
-                  style: TextStyle(fontSize: 20),
-                )),
-            Container(
-              padding: const EdgeInsets.all(10),
-              child: TextField(
-                controller: nameController,
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'User Name',
-                ),
-              ),
+
+            TextField(
+  obscureText: true,
+  controller: passwordController,
+  decoration: InputDecoration(
+    labelText: 'Password',
+    filled: true,
+    fillColor: Colors.grey.shade200,
+    labelStyle: TextStyle(
+      color: Colors.grey[600],
+      fontWeight: FontWeight.bold,
+    ),
+    
+    enabledBorder: OutlineInputBorder(
+      borderSide: BorderSide(
+        color: Colors.grey[400]!,
+      ),
+      borderRadius: BorderRadius.circular(15.0),
+    ),
+    focusedBorder: const OutlineInputBorder(
+      borderSide: BorderSide(
+        color: Colors.blue,
+        width: 2,
+      ),
+    ),
+    suffixIcon: Icon(
+      Icons.visibility,
+      color: Colors.grey[600],
+    ),
+  ),
+),
+
+            // TextField(
+            //   obscureText: true,
+            //   controller: passwordController,
+            //   decoration: const InputDecoration(
+            //     border: OutlineInputBorder(),
+            //     labelText: 'Password',
+            //   ),
+            // ),
+            const SizedBox(
+              height: 20,
             ),
-            Container(
-              padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
-              child: TextField(
-                obscureText: true,
-                controller: passwordController,
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'Password',
-                ),
-              ),
-            ),
-            TextButton(
-              onPressed: () {
-                //forgot password screen
-              },
-              child: const Text(
-                'Forgot Password',
-              ),
-            ),
-            Container(
-                height: 50,
-                padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                child: ElevatedButton(
-                    child: const Text('Login'),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                // TextButton(
+                //   onPressed: () {
+                //     //forgot password screen
+                //   },
+                //   child: const Text(
+                //     'Forgot Password',
+                //     style: TextStyle(color: Colors.grey),
+                //   ),
+                // ),
+                // const SizedBox(
+                //   width: 20,
+                // ),
+                ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.blue,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 30, vertical: 15),
+                    ),
+                    child: const Text(
+                      'Login',
+                      style: TextStyle(fontSize: 20),
+                    ),
                     onPressed: () async {
-                      print(nameController.text);
-                      print(passwordController.text);
                       User? user = await signInUsingEmailPassword(
                           email: nameController.text,
                           password: passwordController.text,
                           context: context);
-                      print(user);
-                      // if (user != null) {
-                      //   Navigator.of(context).pushReplacement(MaterialPageRoute(
-                      //       builder: (context) => const MyHomePage()));
-                      // }
                       if (user != null) {
                         if (user.email == "admin@gmail.com") {
                           Navigator.push(context,
@@ -171,23 +260,15 @@ class _LoginPage extends State<LoginPage> {
                                   builder: (context) => const MyHomePage()));
                         }
                       }
-                    }))
-            // Row(
-            //   children: <Widget>[
-            //     const Text('Does not have account?'),
-            //     TextButton(
-            //       child: const Text(
-            //         'Sign up',
-            //         style: TextStyle(fontSize: 20),
-            //       ),
-            //       onPressed: () {
-            //         //signup screen
-            //       },
-            //     )
-            //   ],
-            //   mainAxisAlignment: MainAxisAlignment.center,
-            // ),
+                    })
+                    ],
+                  )
+            
           ],
-        ));
+        ),
+        ),
+      ),
+
+        );
   }
 }
