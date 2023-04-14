@@ -1,7 +1,7 @@
 //import 'dart:async';
 
 import 'dart:async';
-
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:sensor_data_logging/jsonConv.dart';
 import 'package:sensor_data_logging/login.dart';
@@ -63,18 +63,32 @@ class _MyAdminPageState extends State<MyAdminPage> {
   }
 
   Stream<String> getBodyDataStream() async* {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    while (true) {
-      String? bodyData = prefs.getString('bodyData');
-      print('This is getBodyDataStream WORKS');
-      print(bodyData);
-      if (bodyData != null) {
-        yield bodyData;
+  // SharedPreferences prefs = await SharedPreferences.getInstance();
+  while (true) {
+    try {
+      // Send an HTTP GET request to the API endpoint
+      var response = await http.get(Uri.parse('https://sensorapi.up.railway.app/predict'));
+
+      // Check if the response is successful
+      if (response.statusCode == 200) {
+        // Parse the response body as a JSON array
+        var bodyData = response.body;
+          if (bodyData != null) {
+            yield bodyData;
+          }
+        }
+      else {
+        // If the response is not successful, log the error and wait for a bit before trying again
+        print('Error: HTTP ${response.statusCode}');
+        await Future.delayed(Duration(milliseconds: 500));
       }
-      // Add a delay to avoid excessive polling
+    } catch (e) {
+      // If there's an exception, log the error and wait for a bit before trying again
+      print('Error: $e');
       await Future.delayed(Duration(milliseconds: 500));
     }
   }
+}
 
   @override
   Widget build(BuildContext context) {
