@@ -219,18 +219,7 @@ class _LoginPage extends State<LoginPage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                // TextButton(
-                //   onPressed: () {
-                //     //forgot password screen
-                //   },
-                //   child: const Text(
-                //     'Forgot Password',
-                //     style: TextStyle(color: Colors.grey),
-                //   ),
-                // ),
-                // const SizedBox(
-                //   width: 20,
-                // ),
+                
                 ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       primary: Colors.blue,
