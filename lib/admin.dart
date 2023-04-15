@@ -108,7 +108,7 @@ class _MyAdminPageState extends State<MyAdminPage> {
         title: const Text('Admin Page'),
         actions: <Widget>[
           Padding(
-              padding: EdgeInsets.only(right: 20.0),
+              padding: const EdgeInsets.only(right: 20.0),
               child: GestureDetector(
                 onTap: () {
                   Navigator.push(

@@ -1,4 +1,6 @@
 import 'dart:async';
+import 'package:sensor_data_logging/Train.dart';
+
 import 'admin.dart';
 import 'package:flutter/material.dart';
 // import 'package:sensor_data_logging/chart.dart';
@@ -65,25 +67,7 @@ class _MyHomePageState extends State<MyHomePage> {
     // print(finalData);
 
     return Scaffold(
-      // appBar: AppBar(
-      //   title: const Text('Activity Recognition'),
-      //   actions: <Widget>[
-      //     Padding(
-      //         padding: EdgeInsets.only(right: 20.0),
-      //         child: GestureDetector(
-      //           onTap: () {
-      //             Navigator.push(
-      //               context,
-      //               MaterialPageRoute(builder: (context) => Login()),
-      //             );
-      //           },
-      //           child: Icon(
-      //             Icons.logout,
-      //             size: 26.0,
-      //           ),
-      //         )),
-      //   ],
-      // ),
+      
       body: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
@@ -162,34 +146,62 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ),
             ),
-            ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  primary: Colors.blue,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
-                ),
-                child: const Text(
-                  'Log Out',
-                  style: TextStyle(fontSize: 20),
-                ),
-                onPressed: () async {
-                  try {
-                    await FirebaseAuth.instance.signOut();
-                    // super.dispose();
-                     dispose();
+            Row(
+  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+  children: [
+    ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        primary: Colors.blue,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+        ),
+        padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+      ),
+      child: const Text(
+        'Log Out',
+        style: TextStyle(fontSize: 20),
+      ),
+      onPressed: () async {
+        try {
+          await FirebaseAuth.instance.signOut();
+          // dispose();
+          // Navigate to the Login page
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => const Login()),
+          );
+        } catch (e) {
+          // Handle logout failure
+        }
+      }
+    ),
+    ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: Colors.green,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+        ),
+        padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+      ),
+      child: const Text(
+        'Train',
+        style: TextStyle(fontSize: 20),
+      ),
+      onPressed: () {
+        // Handle button press
+        // dispose();
+          // Navigate to the Login page
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => const Train()),
+          );
+    }
 
-    // Navigate to the Login page
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(builder: (context) => Login()),
-    ); // navigate to the login screen
-                  } catch (e) {
-                    // Handle logout failure
-                  }
-                }),
+      
+    ),
+  ],
+),
+
           ]),
     );
   }

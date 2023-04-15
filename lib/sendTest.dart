@@ -8,7 +8,7 @@ class ApiReq {
   sendApi(var data) async {
     var body = json.encode(data);
     // print("hi");
-    // print(body);
+    print(body);
     var response = await http.post(
       Uri.parse("https://sensorapi.up.railway.app/predict"),
       headers: {"Content-Type": "application/json"},

@@ -105,19 +105,7 @@ class _LoginPage extends State<LoginPage> {
               height: 200,
               width: 200,
             ),
-            // const SizedBox(
-            //   height: 1,
-            // ),
-            // const Text(
-            //   'Activity Recognizer',
-            //   style: TextStyle(
-            //       color: Colors.blue,
-            //       fontWeight: FontWeight.w500,
-            //       fontSize: 30),
-            // ),
-            // const SizedBox(
-            //   height: 20,
-            // ),
+            
             TextFormField(
   controller: nameController,
   keyboardType: TextInputType.text,
