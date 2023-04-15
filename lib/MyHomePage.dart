@@ -164,7 +164,7 @@ class _MyHomePageState extends State<MyHomePage> {
       onPressed: () async {
         try {
           await FirebaseAuth.instance.signOut();
-          // dispose();
+          dispose();
           // Navigate to the Login page
           Navigator.pushReplacement(
             context,
