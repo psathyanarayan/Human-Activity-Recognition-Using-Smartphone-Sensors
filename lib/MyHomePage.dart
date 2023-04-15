@@ -45,20 +45,25 @@ class _MyHomePageState extends State<MyHomePage> {
     final magnetometer =
         _magnetometerValues?.map((double v) => v.toStringAsFixed(1)).toList();
 
-    SensorData acc = SensorData(
-      Ax: _accelerometerValues![0],
-      Ay: _accelerometerValues![1],
-      Az: _accelerometerValues![2],
-      LAx: _userAccelerometerValues![0],
-      LAy: _userAccelerometerValues![1],
-      LAz: _userAccelerometerValues![2],
-      Gx: _gyroscopeValues![0],
-      Gy: _gyroscopeValues![1],
-      Gz: _gyroscopeValues![2],
-      Mx: _magnetometerValues![0],
-      My: _magnetometerValues![1],
-      Mz: _magnetometerValues![2],
-    );
+    SensorData? acc = _accelerometerValues != null &&
+            _userAccelerometerValues != null &&
+            _gyroscopeValues != null &&
+            _magnetometerValues != null
+        ? SensorData(
+            Ax: _accelerometerValues![0],
+            Ay: _accelerometerValues![1],
+            Az: _accelerometerValues![2],
+            LAx: _userAccelerometerValues![0],
+            LAy: _userAccelerometerValues![1],
+            LAz: _userAccelerometerValues![2],
+            Gx: _gyroscopeValues![0],
+            Gy: _gyroscopeValues![1],
+            Gz: _gyroscopeValues![2],
+            Mx: _magnetometerValues![0],
+            My: _magnetometerValues![1],
+            Mz: _magnetometerValues![2],)
+            
+        : null;
     // print(acc);
 
     var apiReq = ApiReq();
