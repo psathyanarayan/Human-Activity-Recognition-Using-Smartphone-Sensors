@@ -1,16 +1,11 @@
-//import 'dart:async';
-
 import 'dart:async';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
-import 'package:sensor_data_logging/jsonConv.dart';
 import 'package:sensor_data_logging/login.dart';
 import 'package:sensor_data_logging/sendTest.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-// void main() {
-//   runApp(const admin());
-// }
 
+
+// ignore: camel_case_types
 class admin extends StatelessWidget {
   const admin({Key? key}) : super(key: key);
 
@@ -63,7 +58,7 @@ class _MyAdminPageState extends State<MyAdminPage> {
   }
 
   Stream<String> getBodyDataStream() async* {
-    // SharedPreferences prefs = await SharedPreferences.getInstance();
+    
     while (true) {
       try {
         // Send an HTTP GET request to the API endpoint
@@ -74,34 +69,26 @@ class _MyAdminPageState extends State<MyAdminPage> {
         if (response.statusCode == 200) {
           // Parse the response body as a JSON array
           var bodyData = response.body;
-          if (bodyData != null) {
-            yield bodyData;
-          }
+          yield bodyData;
         } else {
           // If the response is not successful, log the error and wait for a bit before trying again
+          // ignore: avoid_print
           print('Error: HTTP ${response.statusCode}');
-          await Future.delayed(Duration(milliseconds: 500));
+          await Future.delayed(const Duration(milliseconds: 500));
         }
       } catch (e) {
         // If there's an exception, log the error and wait for a bit before trying again
+        // ignore: avoid_print
         print('Error: $e');
-        await Future.delayed(Duration(milliseconds: 500));
+        await Future.delayed(const Duration(milliseconds: 500));
       }
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    // final accelerometer =
-    // _accelerometerValues?.map((double v) => v.toStringAsFixed(1)).toList();
-    // final gyroscope =
-    // _gyroscopeValues?.map((double v) => v.toStringAsFixed(1)).toList();
-    // final userAccelerometer = _userAccelerometerValues
-    //     ?.map((double v) => v.toStringAsFixed(1))
-    //     .toList();
-    // final magnetometer =
-    // _magnetometerValues?.map((double v) => v.toStringAsFixed(1)).toList();
-    Set<String> snapshotDataList = Set<String>();
+    
+    Set<String> snapshotDataList = <String>{};
 
     return Scaffold(
       appBar: AppBar(
@@ -113,10 +100,10 @@ class _MyAdminPageState extends State<MyAdminPage> {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => Login()),
+                    MaterialPageRoute(builder: (context) => const Login()),
                   );
                 },
-                child: Icon(
+                child: const Icon(
                   Icons.logout,
                   size: 26.0,
                 ),
@@ -157,25 +144,7 @@ class _MyAdminPageState extends State<MyAdminPage> {
                         ),
                       ),
                     ),
-                    // CircleAvatar(
-                    //   backgroundColor: Colors.blue[500],
-                    //   radius: 45,
-                    //   child: const CircleAvatar(
-                    //     backgroundImage: NetworkImage(
-                    //         "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png?20150327203541"), //NetworkImage
-                    //     radius: 100,
-                    //   ), //CircleAvatar
-                    // ),
-
-                    // const Text(
-                    //   "Name : Admin",
-                    //   style: TextStyle(
-                    //     fontSize: 20,
-                    //     color: Colors.black,
-                    //     fontWeight: FontWeight.w400,
-                    //   ),
-                    // ),
-                    // const SizedBox(height: 40),
+                  
 
                     Text(
                       'Activity Report',
@@ -214,16 +183,15 @@ class _MyAdminPageState extends State<MyAdminPage> {
                             String? snapshotData = snapshot.data;
                             String dataDigits =
                                 snapshotData!.replaceAll(RegExp('[^0-9]'), '');
-                            String dataWithoutDigits =
-                                snapshotData.replaceAll(RegExp('[0-9]'), '');
-                            print(dataDigits);
+                           
+                            
                             if (!snapshotDataList.contains(snapshotData)) {
                               if ((snapshotDataList
                                   .any((str) => str.contains(dataDigits)))) {
                                 String existingData = snapshotDataList.firstWhere(
-        (str) => str.contains(dataDigits));
-    snapshotDataList.remove(existingData);
-    snapshotDataList.add(snapshotData);
+                                (str) => str.contains(dataDigits));
+                            snapshotDataList.remove(existingData);
+                            snapshotDataList.add(snapshotData);
                               } else {
                                 snapshotDataList.add(snapshotData);
                               }
@@ -248,7 +216,7 @@ class _MyAdminPageState extends State<MyAdminPage> {
                               rows: snapshotDataList.map((data) {
                                 return DataRow(cells: [
                                   DataCell(
-                                    Container(
+                                    SizedBox(
                                       width: MediaQuery.of(context).size.width *
                                           0.53, // set the cell width to 80% of the screen width
                                       child: Text(

@@ -35,10 +35,10 @@ class SensorData {
   }
 }
 
-String toJsonString(SensorData _accelerometerData) {
+String toJsonString(SensorData accelerometerData) {
   // Append the data to a list
-  List<Map<String, dynamic>> dataList = [];
-  // dataList.add(_accelerometerData.toJson());
+  // List<Map<String, dynamic>> dataList = [];
+  // dataList.add(accelerometerData.toJson());
 
   // Create a nested JSON object
   // Map<String, dynamic> nestedJsonData = {'input1': dataList};
@@ -47,7 +47,7 @@ String toJsonString(SensorData _accelerometerData) {
   // Map<String, dynamic> jsonData = {'Inputs': nestedJsonData};
 
   // Convert to JSON string
-  String jsonString = jsonEncode(_accelerometerData.toJson());
+  String jsonString = jsonEncode(accelerometerData.toJson());
 
   // Return the JSON string
   return jsonString;
@@ -55,11 +55,11 @@ String toJsonString(SensorData _accelerometerData) {
 
 // void main() {
 //   // Sample accelerometer and gyroscope data
-//   SensorData _accelerometerData =
+//   SensorData accelerometerData =
 //       SensorData(Ax: 1.0, Ay: 2.0, Az: 3.0, Gx: 4.0, Gy: 5.0, Gz: 6.0);
-//   print(_accelerometerData);
+//   print(accelerometerData);
 //   // Convert to JSON string
-//   String jsonString = toJsonString(_accelerometerData);
+//   String jsonString = toJsonString(accelerometerData);
 
 //   // Print the JSON string
 //   print(jsonString);
