@@ -153,7 +153,8 @@ class _MyAdminPageState extends State<MyAdminPage> {
                         color: Colors.blue[900],
                         fontWeight: FontWeight.w400,
                       ), //Textstyle
-                    ), //Text
+                    ), 
+                    //Text
                     const SizedBox(
                       height: 26,
                     ), //SizedBox
@@ -199,38 +200,41 @@ class _MyAdminPageState extends State<MyAdminPage> {
                             // print(snapshotDataList);
                           }
 
-                          return SingleChildScrollView(
-                            scrollDirection: Axis.vertical,
-                            child: DataTable(
-                              columns: const [
-                                DataColumn(
-                                    label: Text(
-                                  'Human Activity Data',
-                                  // textAlign: TextAlign.center,
+                          return SizedBox(
+  height: 400, // set a fixed height for the SizedBox
+  child: SingleChildScrollView(
+    scrollDirection: Axis.vertical,
+    child: DataTable(
+      columns: const [
+        DataColumn(
+          label: Text(
+            'Human Activity Data',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+      ],
+      rows: snapshotDataList.map((data) {
+        return DataRow(cells: [
+          DataCell(
+            SizedBox(
+              width: MediaQuery.of(context).size.width *
+                  0.53, // set the cell width to 80% of the screen width
+              child: Text(
+                data,
+                overflow: TextOverflow
+                    .ellipsis, // add ellipsis to the text if it overflows the cell
+                textAlign: TextAlign.center,
+              ),
+            ),
+          ),
+        ]);
+      }).toList(),
+    ),
+  ),
+);
 
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                )),
-                              ],
-                              rows: snapshotDataList.map((data) {
-                                return DataRow(cells: [
-                                  DataCell(
-                                    SizedBox(
-                                      width: MediaQuery.of(context).size.width *
-                                          0.53, // set the cell width to 80% of the screen width
-                                      child: Text(
-                                        data,
-                                        overflow: TextOverflow
-                                            .ellipsis, // add ellipsis to the text if it overflows the cell
-                                        textAlign: TextAlign.center,
-                                      ),
-                                    ),
-                                  ),
-                                ]);
-                              }).toList(),
-                            ),
-                          );
                         },
                       ),
                     )
