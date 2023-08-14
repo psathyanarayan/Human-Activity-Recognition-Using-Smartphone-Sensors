@@ -19,7 +19,10 @@ Login Module is responsible for the user getting authenticated into the proposed
 
 ## Result
 
-![Image 1](images/client1.jpg) ![Image 2](images/admin.jpg)
+<div style="display: flex; justify-content: space-around;">
+  <img src="images/client1.jpg" alt="Image 1" width="35%">
+  <img src="images/admin.jpg" alt="Image 2" width="35%">
+</div>
 
 
 
