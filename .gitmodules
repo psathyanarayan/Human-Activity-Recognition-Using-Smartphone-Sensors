@@ -1,0 +1,3 @@
+[submodule "path/to/submodule/folder"]
+	path = path/to/submodule/folder
+	url = https://github.com/psathyanarayan/Activity-Recogntion-KNN-Model-in-Flask.git
