@@ -17,4 +17,9 @@ Login Module is responsible for the user getting authenticated into the proposed
 
 ![Project Logo](images/arch2.svg)
 
+## Result
+
+![Image 1](images/client1.jpg) ![Image 2](images/admin.jpg)
+
+
 
